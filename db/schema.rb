@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20170611185710) do
     t.string   "first_name",  null: false
     t.string   "family_name", null: false
     t.date     "born_on",     null: false
-    t.string   "gender",      null: false
+    t.string   "email",       null: false
     t.integer  "user_id",     null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -38,10 +38,12 @@ ActiveRecord::Schema.define(version: 20170611185710) do
     t.string   "description",                          null: false
     t.date     "service_date",                         null: false
     t.decimal  "price",        precision: 8, scale: 2, null: false
-    t.integer  "client",                               null: false
-    t.integer  "user",                                 null: false
+    t.integer  "client_id",                            null: false
+    t.integer  "user_id",                              null: false
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+    t.index ["client_id"], name: "index_services_on_client_id", using: :btree
+    t.index ["user_id"], name: "index_services_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,4 +58,6 @@ ActiveRecord::Schema.define(version: 20170611185710) do
 
   add_foreign_key "clients", "users"
   add_foreign_key "examples", "users"
+  add_foreign_key "services", "clients"
+  add_foreign_key "services", "users"
 end

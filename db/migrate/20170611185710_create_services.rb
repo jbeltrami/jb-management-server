@@ -4,8 +4,8 @@ class CreateServices < ActiveRecord::Migration[5.0]
       t.string :description, null: false
       t.date :service_date, null: false
       t.decimal :price, :precision => 8, :scale => 2, null: false
-      t.integer :client, foreign_key: true, null: false
-      t.integer :user, foreign_key: true, null: false
+      t.references :client, foreign_key: true, null: false
+      t.references :user, foreign_key: true, null: false
       t.timestamps
     end
   end
