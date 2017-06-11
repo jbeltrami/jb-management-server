@@ -247,7 +247,7 @@ our code. The `rails generate` commands are particularly interesting.
 ### Creating a Blog API
 
 -   Use the quite-excellent [Rails API
-    Template](https://github.com/ga-wdi-boston/rails-api-template), already
+    Template](https://github.com/ga-wdi-boston/jb-management-server-template), already
     included in this repository for our convenience.
 -   Scaffold our Posts and Comments (Users come with the template!)
     -   `bin/rails generate scaffold post title:string body:text

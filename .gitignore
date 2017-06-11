@@ -119,7 +119,7 @@ pickle-email-*.html
 .rvmrc
 # if using bower-rails ignore default bower_components path bower.json files
 /vendor/assets/bower_components
-*.bowerrc # shouldn't be an issue in rails-api repositories
+*.bowerrc # shouldn't be an issue in jb-management-server repositories
 bower.json # same
 # Ignore pow environment settings
 .powenv
