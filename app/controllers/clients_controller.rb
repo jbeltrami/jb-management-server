@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :update, :destroy]
+  before_action :set_client, only: %i[show update destroy]
+  before_action :validate_user
 
   # GET /clients
   def index
-    @clients = Client.all
+    @clients = current_user.clients.all
 
     render json: @clients
   end
@@ -15,8 +18,8 @@ class ClientsController < ApplicationController
 
   # POST /clients
   def create
-    @client = Client.new(client_params)
-
+    @client = current_user.build(client_params)
+    @client.valid?
     if @client.save
       render json: @client, status: :created, location: @client
     else
@@ -39,13 +42,19 @@ class ClientsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_client
-      @client = Client.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def client_params
-      params.require(:client).permit(:first_name, :family_name, :born_on, :gender, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_client
+    validate_user
+    @client = current_user.clients.find(params[:id])
+  end
+
+  def validate_user
+    set_current_user
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def client_params
+    params.require(:client).permit(:first_name, :family_name, :born_on, :gender)
+  end
 end

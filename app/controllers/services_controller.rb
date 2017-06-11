@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 class ServicesController < ApplicationController
-  before_action :set_service, only: [:show, :update, :destroy]
+  before_action :set_service, only: %i[show update destroy]
+  before_action :validate_user
 
   # GET /services
   def index
-    @services = Service.all
+    @services = current_user.services.all
 
     render json: @services
   end
@@ -15,8 +18,8 @@ class ServicesController < ApplicationController
 
   # POST /services
   def create
-    @service = Service.new(service_params)
-
+    @service = current_user.services.build(service_params)
+    @service.valid?
     if @service.save
       render json: @service, status: :created, location: @service
     else
@@ -39,13 +42,19 @@ class ServicesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_service
-      @service = Service.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def service_params
-      params.require(:service).permit(:description, :service_date, :price, :client, :user)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_service
+    validate_user
+    @service = current_user.services.find(params[:id])
+  end
+
+  def validate_user
+    set_current_user
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def service_params
+    params.require(:service).permit(:description, :service_date, :price)
+  end
 end
