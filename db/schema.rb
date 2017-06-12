@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20170611185710) do
   create_table "clients", force: :cascade do |t|
     t.string   "first_name",  null: false
     t.string   "family_name", null: false
-    t.date     "born_on",     null: false
+    t.date     "born_on"
     t.string   "email",       null: false
     t.integer  "user_id",     null: false
     t.datetime "created_at",  null: false

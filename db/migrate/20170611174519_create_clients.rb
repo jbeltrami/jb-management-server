@@ -3,7 +3,7 @@ class CreateClients < ActiveRecord::Migration[5.0]
     create_table :clients do |t|
       t.string :first_name, null: false
       t.string :family_name, null: false
-      t.date :born_on, null: false
+      t.date :born_on
       t.string :email, null: false
       t.references :user, foreign_key: true, null: false
 

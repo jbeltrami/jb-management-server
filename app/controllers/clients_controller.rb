@@ -18,7 +18,9 @@ class ClientsController < ProtectedController
 
   # POST /clients
   def create
-    @client = current_user.build(client_params)
+    # require'pry'
+    # binding.pry
+    @client = current_user.clients.build(client_params)
     @client.valid?
     if @client.save
       render json: @client, status: :created, location: @client
@@ -55,6 +57,6 @@ class ClientsController < ProtectedController
 
   # Only allow a trusted parameter "white list" through.
   def client_params
-    params.require(:client).permit(:first_name, :family_name, :born_on, :gender)
+    params.require(:client).permit(:first_name, :family_name, :born_on, :email)
   end
 end
