@@ -2,7 +2,10 @@
 
 class User < ApplicationRecord
   include Authentication
-  has_many :examples
+  # one-to-many
+  has_many :individual_clients, class_name: 'Client'
+
+  # many-to-many
   has_many :clients
   has_many :services
 end
