@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ClientsController < ApplicationController
+class ClientsController < ProtectedController
   before_action :set_client, only: %i[show update destroy]
   before_action :validate_user
 

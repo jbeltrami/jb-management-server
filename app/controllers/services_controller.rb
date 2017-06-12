@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ServicesController < ApplicationController
+class ServicesController < ProtectedController
   before_action :set_service, only: %i[show update destroy]
   before_action :validate_user
 
