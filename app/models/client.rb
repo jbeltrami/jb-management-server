@@ -6,4 +6,10 @@ class Client < ApplicationRecord
 
   # many-to-many
   has_many :services, dependent: :destroy
+
+  # validations
+  validates :first_name, presence: true
+  validates :family_name, presence: true
+  validates :born_on, presence: true
+  validates :email, presence: true
 end
